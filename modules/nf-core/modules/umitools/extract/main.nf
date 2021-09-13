@@ -42,15 +42,16 @@ process UMITOOLS_EXTRACT {
         """
     }  else {
         """
+         #called sw12: ${options.sw12} xx
         umi_tools \\
             extract \\
-            -I ${reads[0]} \\
-            --read2-in=${reads[1]} \\
-            -S ${prefix}.umi_extract_1.fastq.gz \\
-            --read2-out=${prefix}.umi_extract_2.fastq.gz \\
+            -I ${reads[1]} \\
+            --read2-in=${reads[0]} \\
+            -S ${prefix}.umi_extract_2.fastq.gz \\
+            --read2-out=${prefix}.umi_extract_1.fastq.gz \\
             $options.args \\
             > ${prefix}.umi_extract.log
-
+            
         echo \$(umi_tools --version 2>&1) | sed 's/^.*UMI-tools version://; s/ *\$//' > ${software}.version.txt
         """
     }
